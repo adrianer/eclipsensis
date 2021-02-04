@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %plugin.name
 Bundle-SymbolicName: net.sf.eclipsensis.utilities; singleton := true
-Bundle-Version: 0.9.11
+Bundle-Version: 0.9.12
 Bundle-Vendor: %plugin.vendor
 Bundle-Activator: net.sf.eclipsensis.utilities.UtilitiesPlugin
 Bundle-Localization: plugin
@@ -20,4 +20,4 @@ Export-Package: net.sf.eclipsensis.utilities,
  net.sf.eclipsensis.utilities.job,
  net.sf.eclipsensis.utilities.util
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8

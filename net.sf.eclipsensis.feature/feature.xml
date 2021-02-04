@@ -13,7 +13,7 @@
 <feature
       id="net.sf.eclipsensis"
       label="%feature.name"
-      version="0.9.8.1"
+      version="0.9.12"
       provider-name="%provider.name"
       os="win32"
       ws="win32"
@@ -37,31 +37,13 @@
       <discovery label="%update.site.name" url="http://eclipsensis.sf.net/update/"/>
    </url>
 
-   <requires>
-      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.jface.text" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.editors" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.views" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.workbench.texteditor" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.help.base" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.debug.ui" version="3.5.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.console" version="3.4.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.variables" version="3.2.200" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.externaltools" version="3.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.filesystem" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.ui.net" version="1.2.0" match="greaterOrEqual"/>
-      <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
-   </requires>
-
    <plugin
          id="net.sf.eclipsensis"
          os="win32"
          ws="win32"
          download-size="3735"
          install-size="3735"
-         version="0.9.8.1"
+         version="0.9.12"
          unpack="false"/>
 
    <plugin
@@ -70,7 +52,7 @@
          ws="win32"
          download-size="115"
          install-size="115"
-         version="0.9.8"
+         version="0.9.12"
          unpack="false"/>
 
    <plugin
@@ -79,7 +61,7 @@
          ws="win32"
          download-size="16"
          install-size="16"
-         version="0.9.8"
+         version="0.9.12"
          unpack="false"/>
 
 </feature>

@@ -455,7 +455,7 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
             version = System.getProperty("java.vm.version"); //$NON-NLS-1$
         }
         mJavaVersion = new Version(version,"._"); //$NON-NLS-1$
-        Map<String,String> vms = Common.loadMapProperty(getResourceBundle(),(mIsNT?"nt.vms":"9x.vms"),'\u00FF'); //$NON-NLS-1$ //$NON-NLS-2$
+        Map<String,String> vms = Common.loadMapProperty(getResourceBundle(),"nt.vms",'\u00FF'); //$NON-NLS-1$ //$NON-NLS-2$
         version = vms.get(mJavaVendor);
         if(version != null) {
             String[] tokens = Common.tokenize(version,'-');
@@ -471,7 +471,8 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
                 }
             }
         }
-        String vmError = getFormattedString((mIsNT?"unsupported.nt.vms.error":"unsupported.9x.vms.error"),new String[]{System.getProperty("os.name")}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+        String vmError = getFormattedString("unsupported.nt.vms.error",new String[]{System.getProperty("os.name")}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         Common.openError(getWorkbench().getActiveWorkbenchWindow().getShell(),
                         vmError, getShellImage());
         cInvalidException = vmError;
