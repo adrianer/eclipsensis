@@ -2,9 +2,21 @@
 
 _"EclipseNSIS is a plugin for the Eclipse platform which enables editing, compiling and testing Nullsoft Installer (NSIS) scripts. The EclipseNSIS InstallOptions Editor plugin is an add-on to EclipseNSIS which enables editing of InstallOptions scripts."_ -- http://eclipsensis.sourceforge.net/index.shtml
 
-This project is a fork of a fork of a fork of the original EclipseNSIS at http://eclipsensis.sf.net. 
+This project is a fork of a fork of a fork of a fork of the original EclipseNSIS at http://eclipsensis.sf.net. 
 
 # Changelog and Download
+
+## Forked and Fixed (0.9.13)
+
+This project is a fork of [adrianer/eclipsensis](https://github.com/adrianer/eclipsensis) and fixed for:
+
+* Support up to Java 15
+* Windows Server 2012 R2, Server 2016, Server 2019
+* NSIS 2.xx and 3.xx (>= 3.04)
+* Tested with Eclipse Neon 3 and 2020-12
+
+InstallOptions needs GEF (MVC) plugin.
+Latest version: [0.9.13](https://github.com/hevmaad/eclipsensis/raw/master/dist/eclipsensis-0.9.13.zip)
 
 ## Forked and Fixed (0.9.12)
 

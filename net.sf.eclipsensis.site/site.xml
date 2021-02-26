@@ -3,16 +3,16 @@
    <description name="EclipseNSIS Update Site" url="http://eclipsensis.sf.net/update">
       Download released versions of EclipseNSIS plugins here.
    </description>
-   <feature url="features/net.sf.eclipsensis_0.9.12.jar" id="net.sf.eclipsensis" version="0.9.12" os="win32" ws="win32" arch="x86,x86_64">
+   <feature url="features/net.sf.eclipsensis_0.9.13.jar" id="net.sf.eclipsensis" version="0.9.13" os="win32" ws="win32" arch="x86,x86_64">
       <category name="EclipseNSIS"/>
    </feature>
    <feature url="features/net.sf.eclipsensis.installoptions_0.9.12.jar" id="net.sf.eclipsensis.installoptions" version="0.9.12" os="win32" ws="win32" arch="x86,x86_64">
       <category name="EclipseNSIS InstallOptions Editor"/>
    </feature>
-   <feature url="features/net.sf.eclipsensis.source_0.9.12.jar" id="net.sf.eclipsensis.source" version="0.9.12">
+   <feature url="features/net.sf.eclipsensis.source_0.9.13.jar" id="net.sf.eclipsensis.source" version="0.9.13">
       <category name="EclipseNSIS Sources"/>
    </feature>
-   <feature url="features/net.sf.eclipsensis.utilities_0.9.3.jar" id="net.sf.eclipsensis.utilities" version="0.9.3">
+   <feature url="features/net.sf.eclipsensis.utilities_0.9.13.jar" id="net.sf.eclipsensis.utilities" version="0.9.13">
       <category name="EclipseNSIS Utilities"/>
    </feature>
    <category-def name="EclipseNSIS" label="EclipseNSIS"/>
