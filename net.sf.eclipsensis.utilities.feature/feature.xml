@@ -13,7 +13,7 @@
 <feature
       id="net.sf.eclipsensis.utilities"
       label="%feature.name"
-      version="0.9.3"
+      version="0.9.12"
       provider-name="%provider.name"
       image="%splash.image">
    <install-handler/>
@@ -34,6 +34,19 @@
       <update label="%update.site.name" url="http://eclipsensis.sf.net/update"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.launching" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.core" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jface" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.workbench" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.console" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.debug.core" version="3.5.0" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="net.sf.jarsigner"
          download-size="63"
@@ -52,7 +65,7 @@
          id="net.sf.eclipsensis.utilities"
          download-size="42"
          install-size="42"
-         version="0.9.3"
+         version="0.9.12"
          unpack="false"/>
 
 </feature>
