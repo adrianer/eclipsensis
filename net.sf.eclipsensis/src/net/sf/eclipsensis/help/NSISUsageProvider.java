@@ -96,11 +96,19 @@ public class NSISUsageProvider implements IEclipseNSISService
                 }
 
                 if(exeTimeStamp != cacheTimeStamp) {
-                    String[] output = MakeNSISRunner.runProcessWithOutput(exe.getFile().getAbsolutePath(),new String[]{
-                        MakeNSISRunner.MAKENSIS_VERBOSITY_OPTION+"1", //$NON-NLS-1$
-                        MakeNSISRunner.MAKENSIS_CMDHELP_OPTION},
-                        null,1);
-
+                    String[] output;
+                    if (exe.getVersion().compareTo(INSISVersions.VERSION_3_04) >= 0) {
+                        // omit verbosity option to get a clean output
+                        output = MakeNSISRunner.runProcessWithOutput(exe.getFile().getAbsolutePath(),new String[]{
+                                MakeNSISRunner.MAKENSIS_CMDHELP_OPTION},
+                                null,0);
+                    }
+                    else {
+                        output = MakeNSISRunner.runProcessWithOutput(exe.getFile().getAbsolutePath(),new String[]{
+                            MakeNSISRunner.MAKENSIS_VERBOSITY_OPTION+"1", //$NON-NLS-1$
+                            MakeNSISRunner.MAKENSIS_CMDHELP_OPTION},
+                            null,1);
+                    }
                     if(!Common.isEmptyArray(output)) {
                         StringBuffer buf = null;
                         for (int i = 0; i < output.length; i++) {

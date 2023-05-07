@@ -814,6 +814,27 @@ public class MakeNSISRunner implements INSISConstants
         return output;
     }
 
+    public static Integer findProcessReturnCode(String makensisExe, String[] cmdArray, File workDir)
+    {
+        Integer rv = null;
+        try {
+            MakeNSISProcess proc = createProcess(makensisExe, cmdArray, null, workDir);
+            Process process = proc.getProcess();
+            new Thread(new RunnableInputStreamReader(process.getErrorStream(),false),EclipseNSISPlugin.getResourceString("makensis.stderr.thread.name")).start(); //$NON-NLS-1$
+            new RunnableInputStreamReader(process.getInputStream()).getOutput();
+            rv = process.waitFor();
+            IOUtility.closeIO(process.getOutputStream());
+        }
+        catch (IOException e) {
+            EclipseNSISPlugin.getDefault().log(e);
+        }
+        catch (InterruptedException e) {
+            EclipseNSISPlugin.getDefault().log(e);
+        }
+
+        return rv;
+    }
+
     private static MakeNSISProcess createProcess(String makeNSISExe, String[] cmdArray, String[] env, File workDir) throws IOException
     {
         if(!Common.isEmptyArray(cmdArray))

@@ -472,7 +472,7 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
             }
         }
 
-        String vmError = getFormattedString("unsupported.nt.vms.error",new String[]{System.getProperty("os.name")}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+        String vmError = getFormattedString("unsupported.nt.vms.error",new String[]{System.getProperty("os.name")}) + "\nJava VM '" + mJavaVendor + "' is not supported."; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         Common.openError(getWorkbench().getActiveWorkbenchWindow().getShell(),
                         vmError, getShellImage());
         cInvalidException = vmError;

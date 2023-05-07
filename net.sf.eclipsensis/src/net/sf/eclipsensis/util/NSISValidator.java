@@ -110,9 +110,24 @@ public class NSISValidator implements INSISConstants
             File file = new File(nsisHome,MAKENSIS_EXE);
             if(IOUtility.isValidFile(file)) {
                 String exeName = file.getAbsoluteFile().getAbsolutePath();
+
                 String[] output = MakeNSISRunner.runProcessWithOutput(exeName,
+                        new String[]{MakeNSISRunner.MAKENSIS_VERSION_OPTION},
+                        file.getParentFile(), 0);
+
+                int rv;
+                if (output != null && output.length > 0) {
+                    Properties oneSymbol = new Properties();
+                    oneSymbol.put(NSIS_VERSION, output[0]);
+                    rv = (getNSISVersion(oneSymbol).compareTo(INSISVersions.VERSION_3_04) >= 0)? 0 : 1;
+                }
+                else {
+                    return null;
+                }
+
+                output = MakeNSISRunner.runProcessWithOutput(exeName,
                                 new String[]{MakeNSISRunner.MAKENSIS_HDRINFO_OPTION},
-                                file.getParentFile(), 1);
+                                file.getParentFile(), rv);
 
                 Properties definedSymbols = loadNSISDefinedSymbols(output);
                 Version version = getNSISVersion(definedSymbols);
