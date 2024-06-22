@@ -144,15 +144,7 @@ public class InstallOptionsTreeEditPart extends AbstractTreeEditPart implements 
         oldChild.setParent(null);
         getChildren().remove(oldChild);
 
-        getChildren().add(index, newChild);
-        newChild.setParent(this);
-        addChildVisual(newChild, index);
-        newChild.addNotify();
-
-        if (isActive()) {
-            newChild.activate();
-        }
-        fireChildAdded(newChild, index);
+        addChild(newChild, index);
     }
 
     /**

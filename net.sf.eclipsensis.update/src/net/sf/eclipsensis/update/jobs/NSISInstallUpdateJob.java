@@ -67,11 +67,8 @@ class NSISInstallUpdateJob extends NSISUpdateJob
                     fileMonStopped = FileMonitor.INSTANCE.stop();
                 }
                 final List<String> cmd = new ArrayList<String>();
-                if(EclipseNSISPlugin.getDefault().isWinVista())
-                {
-                    cmd.add("cmd.exe"); //$NON-NLS-1$
-                    cmd.add("/c"); //$NON-NLS-1$
-                }
+                cmd.add("cmd.exe"); //$NON-NLS-1$
+                cmd.add("/c"); //$NON-NLS-1$
                 cmd.add(mSetupExe.getAbsolutePath());
                 boolean install = (settings.getAction() & SchedulerConstants.UPDATE_INSTALL) == SchedulerConstants.UPDATE_INSTALL;
                 if(install) {

@@ -59,14 +59,8 @@ public class FontUtility
     static {
         String fontNameKey;
         String fontSizeKey;
-        if(EclipseNSISPlugin.getDefault().isWin2K()) {
-            fontNameKey = "default.font.name.win2k"; //$NON-NLS-1$
-            fontSizeKey = "default.font.size.win2k"; //$NON-NLS-1$
-        }
-        else {
-            fontNameKey = "default.font.name"; //$NON-NLS-1$
-            fontSizeKey = "default.font.size"; //$NON-NLS-1$
-        }
+        fontNameKey = "default.font.name"; //$NON-NLS-1$
+        fontSizeKey = "default.font.size"; //$NON-NLS-1$
         DEFAULT_FONT_NAME = InstallOptionsPlugin.getResourceString(fontNameKey,DEFAULT_DEFAULT_FONT_NAME);
         int fontSize;
         try {
@@ -191,9 +185,6 @@ public class FontUtility
                 }
                 Map<String,String> symbols = cNSISSettings.getSymbols();
 
-                if(EclipseNSISPlugin.getDefault().isWinVista() && NSISPreferences.getInstance().getNSISVersion().compareTo(INSISVersions.VERSION_2_21) >= 0) {
-                    symbols.put("WINDOWS_VISTA",""); //$NON-NLS-1$ //$NON-NLS-2$
-                }
                 symbols.put("LANGUAGE", lang.getName()); //$NON-NLS-1$
                 symbols.put("PROPERTIES_FILE", cPropertiesFile.getAbsolutePath()); //$NON-NLS-1$
                 cNSISSettings.setSymbols(symbols);

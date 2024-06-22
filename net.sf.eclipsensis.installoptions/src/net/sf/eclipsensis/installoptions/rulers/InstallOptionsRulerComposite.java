@@ -11,6 +11,7 @@ package net.sf.eclipsensis.installoptions.rulers;
 
 import java.beans.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import net.sf.eclipsensis.installoptions.editor.InstallOptionsGraphicalViewer;
 import net.sf.eclipsensis.installoptions.model.InstallOptionsDialog;
@@ -414,7 +415,7 @@ public class InstallOptionsRulerComposite extends Composite
         @SuppressWarnings({ "restriction", "unchecked" })
         public Handle findHandleAt(org.eclipse.draw2d.geometry.Point p) {
             final GraphicalEditPart gep =
-                (GraphicalEditPart)findObjectAtExcluding(p, new ArrayList<Object>());
+                (GraphicalEditPart)findObjectAtExcluding(p, Collections.emptySet());
             if (!(gep instanceof GuideEditPart)) {
                 return null;
             }

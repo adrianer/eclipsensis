@@ -82,7 +82,7 @@ public class InstallOptionsPaletteProvider
             public void run()
             {
                 Boolean unload = Boolean.valueOf(InstallOptionsPlugin.getDefault().getPreferenceStore().getBoolean(IInstallOptionsConstants.PREFERENCE_UNLOAD_CREATION_TOOL_WHEN_FINISHED));
-                List<ToolEntry> entries = new ArrayList<ToolEntry>();
+                List<PaletteEntry> entries = new ArrayList<>();
                 for (Iterator<InstallOptionsModelTypeDef> iter = InstallOptionsModel.INSTANCE.getControlTypeDefs().iterator(); iter.hasNext(); ) {
                     InstallOptionsModelTypeDef typeDef = iter.next();
                     ToolEntry entry = entryMap.get(typeDef.getType());
@@ -147,7 +147,7 @@ public class InstallOptionsPaletteProvider
     {
         final PaletteDrawer drawer = new PaletteDrawer(InstallOptionsPlugin.getResourceString("palette.templates.drawer.name"),  //$NON-NLS-1$
                 cImageDescriptor);
-        final List<ToolEntry> entries = new ArrayList<ToolEntry>();
+        final List<ToolEntry> entries = new ArrayList<>();
         Boolean unload = Boolean.valueOf(InstallOptionsPlugin.getDefault().getPreferenceStore().getBoolean(IInstallOptionsConstants.PREFERENCE_UNLOAD_CREATION_TOOL_WHEN_FINISHED));
         for(Iterator<IInstallOptionsTemplate> iter = InstallOptionsTemplateManager.INSTANCE.getTemplates().iterator(); iter.hasNext(); ) {
             IInstallOptionsTemplate template = iter.next();
@@ -158,7 +158,7 @@ public class InstallOptionsPaletteProvider
             }
         }
         Collections.sort(entries, cTemplateEntryComparator);
-        drawer.setChildren(new ArrayList<ToolEntry>(entries));
+        drawer.setChildren(new ArrayList<>(entries));
 
         final IInstallOptionsTemplateListener listener = new IInstallOptionsTemplateListener() {
             private ToolEntry findEntry(IInstallOptionsTemplate template)
@@ -203,7 +203,7 @@ public class InstallOptionsPaletteProvider
                     }
                 }
                 Collections.sort(entries, cTemplateEntryComparator);
-                drawer.setChildren(new ArrayList<ToolEntry>(entries));
+                drawer.setChildren(new ArrayList<>(entries));
             }
         };
         InstallOptionsTemplateManager.INSTANCE.addTemplateListener(listener);

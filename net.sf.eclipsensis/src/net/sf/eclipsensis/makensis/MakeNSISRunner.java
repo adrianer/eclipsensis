@@ -714,11 +714,8 @@ public class MakeNSISRunner implements INSISConstants
                 File workDir = exeFile.getParentFile();
                 try {
                     List<String> args = new ArrayList<String>();
-                    if(EclipseNSISPlugin.getDefault().isWinVista())
-                    {
-                        args.add("cmd.exe"); //$NON-NLS-1$
-                        args.add("/c"); //$NON-NLS-1$
-                    }
+                    args.add("cmd.exe"); //$NON-NLS-1$
+                    args.add("/c"); //$NON-NLS-1$
                     args.add(exeName);
                     Process proc = Runtime.getRuntime().exec(args.toArray(new String[args.size()]),null,workDir);
                     if(wait) {
@@ -731,8 +728,14 @@ public class MakeNSISRunner implements INSISConstants
                         console.appendLine(NSISConsoleLine.error(ex.getLocalizedMessage()));
                     }
                     else {
-                        Common.openError(EclipseNSISPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell(),
-                                        ex.getLocalizedMessage(), EclipseNSISPlugin.getShellImage());
+                        Display.getDefault().asyncExec(new Runnable() {
+                            public void run()
+                            {
+                                Common.openError(Display.getCurrent().getActiveShell(),
+                                                 ex.getLocalizedMessage(),
+                                                 EclipseNSISPlugin.getShellImage());
+                            }
+                        });
                     }
                 }
             }

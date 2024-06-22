@@ -131,7 +131,7 @@ public class InstallOptionsDialogLayer extends FreeformLayer implements IInstall
     {
         private TreeSearch mDelegate;
 
-        public WrappedExclusionSearch(TreeSearch delegate, Collection<IInstallOptionsFigure> exclusions)
+        public WrappedExclusionSearch(TreeSearch delegate, Collection<IFigure> exclusions)
         {
             super(exclusions);
             mDelegate = delegate;

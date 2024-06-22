@@ -8,6 +8,17 @@ This project is a fork of a fork of a fork of a fork of the original EclipseNSIS
 
 # Changelog and Download
 
+## Forked and Fixed (0.9.15)
+
+This project is a fork of [spt-oss/eclipsensis](https://github.com/spt-oss/eclipsensis) and fixed for:
+
+* Java supported up to 22 (though tested only with 21)
+* Minimum supported NSIS version set to 3.0
+* Minimum supported Windows version set to 7
+* Tested with Eclipse 2024-06 and Eclipse Adoptium 21
+
+Download: [0.9.15](https://github.com/adrianer/eclipsensis/raw/master/dist/eclipsensis-0.9.15.zip)
+
 ## Forked and Fixed (0.9.14)
 
 This project is a fork of [spt-oss/eclipsensis](https://github.com/spt-oss/eclipsensis) and fixed for:

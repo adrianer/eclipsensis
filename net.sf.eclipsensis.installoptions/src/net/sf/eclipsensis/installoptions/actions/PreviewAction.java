@@ -347,9 +347,7 @@ public class PreviewAction extends Action implements Disposable, IMakeNSISRunLis
                                     symbols.put("PREVIEW_BRANDING",InstallOptionsPlugin.getResourceString(locale,"preview.setup.branding")); //$NON-NLS-1$ //$NON-NLS-2$
                                 }
                                 symbols.put("PREVIEW_NAME",InstallOptionsPlugin.getResourceString(locale,"preview.setup.name")); //$NON-NLS-1$ //$NON-NLS-2$
-                                if(EclipseNSISPlugin.getDefault().isWinVista() && NSISPreferences.getInstance().getNSISVersion().compareTo(INSISVersions.VERSION_2_21) >= 0) {
-                                    symbols.put("WINDOWS_VISTA",""); //$NON-NLS-1$ //$NON-NLS-2$
-                                }
+                                symbols.put("WINDOWS_VISTA",""); //$NON-NLS-1$ //$NON-NLS-2$
 
                                 mSettings.setSymbols(symbols);
                                 final File previewScript = getPreviewScript();

@@ -25,7 +25,8 @@ import net.sf.eclipsensis.util.*;
 import net.sf.eclipsensis.util.Version;
 
 import org.eclipse.core.runtime.*;
-import org.eclipse.core.runtime.preferences.*;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.templates.ContextTypeRegistry;
@@ -60,10 +61,6 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
     private Map<Locale, CompoundResourceBundle> mResourceBundles = new HashMap<Locale, CompoundResourceBundle>();
     public static final String[] BUNDLE_NAMES = new String[]{RESOURCE_BUNDLE,MESSAGE_BUNDLE};
     private ImageManager mImageManager;
-    private boolean mIsNT = false;
-    private boolean mIs2K = false;
-    private boolean mIsVista = false;
-    private boolean mIsWin7 = false;
     private boolean mIsX64 = false;
     private String mJavaVendor;
     private Version mJavaVersion;
@@ -105,7 +102,7 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
         }
         cShellImage = mImageManager.getImage(getResourceString("nsis.icon")); //$NON-NLS-1$
         mName = (String)getBundle().getHeaders().get("Bundle-Name"); //$NON-NLS-1$
-        mPreferences = new InstanceScope().getNode(mName);
+        mPreferences = InstanceScope.INSTANCE.getNode(mName);
         mVersion = new Version((String)getBundle().getHeaders().get("Bundle-Version")); //$NON-NLS-1$
         if(cInvalidException != null) {
             throw new CoreException(new Status(IStatus.ERROR,PLUGIN_ID,IStatus.ERROR,cInvalidException,
@@ -139,11 +136,11 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
             // First try autoconfigure
             NSISPreferences.getInstance().setNSISHome(NSISValidator.getRegistryNSISHome());
             if(!isConfigured()) {
-                final IWorkbenchWindow wwindow = getWorkbench().getActiveWorkbenchWindow();
+                final IWorkbenchWindow wwindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
                 final Runnable configOp = new Runnable() {
                     public void run()
                     {
-                        Shell shell = getWorkbench().getActiveWorkbenchWindow().getShell();
+                        Shell shell = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
                         if(Common.openConfirm(shell,getResourceString("unconfigured.confirm"),getShellImage())) { //$NON-NLS-1$
                             configure();
                         }
@@ -159,7 +156,7 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
                     }
                 }
                 else {
-                    getWorkbench().addWindowListener(new IWindowListener(){
+                    PlatformUI.getWorkbench().addWindowListener(new IWindowListener(){
                         private void schedule()
                         {
                             getJobScheduler().scheduleUIJob(EclipseNSISPlugin.getResourceString("starting.eclipsensis.message"), //$NON-NLS-1$
@@ -175,7 +172,7 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
                         public void windowActivated(IWorkbenchWindow window)
                         {
                             if(window == wwindow && window.getShell().isVisible()) {
-                                getWorkbench().removeWindowListener(this);
+                                PlatformUI.getWorkbench().removeWindowListener(this);
                                 schedule();
                             }
                         }
@@ -187,14 +184,14 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
                         public void windowClosed(IWorkbenchWindow window)
                         {
                             if(window == wwindow) {
-                                getWorkbench().removeWindowListener(this);
+                                PlatformUI.getWorkbench().removeWindowListener(this);
                             }
                         }
 
                         public void windowOpened(IWorkbenchWindow window)
                         {
                             if(window == wwindow && window.getShell().isVisible()) {
-                                getWorkbench().removeWindowListener(this);
+                                PlatformUI.getWorkbench().removeWindowListener(this);
                                 schedule();
                             }
                         }
@@ -357,26 +354,6 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
         });
     }
 
-    public boolean isWinNT()
-    {
-        return mIsNT;
-    }
-
-    public boolean isWin2K()
-    {
-        return mIs2K;
-    }
-
-    public boolean isWinVista()
-    {
-        return mIsVista;
-    }
-
-    public boolean isWin7()
-    {
-        return mIsWin7;
-    }
-
     public boolean isX64()
     {
         return mIsX64;
@@ -385,17 +362,9 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
     private void validateOS() throws CoreException
     {
         String[] supportedOS = Common.loadArrayProperty(getResourceBundle(),"supported.os"); //$NON-NLS-1$
-        List<String> winNTOS = Common.loadListProperty(getResourceBundle(),"nt.os"); //$NON-NLS-1$
-        List<String> win2KOS = Common.loadListProperty(getResourceBundle(),"2K.os"); //$NON-NLS-1$
-        List<String> winVistaOS = Common.loadListProperty(getResourceBundle(),"vista.os"); //$NON-NLS-1$
-        List<String> win7OS = Common.loadListProperty(getResourceBundle(),"win7.os"); //$NON-NLS-1$
         if(!Common.isEmptyArray(supportedOS)) {
             String osName = System.getProperty("os.name"); //$NON-NLS-1$
             String osVersion = System.getProperty("os.version"); //$NON-NLS-1$
-            mIsNT = winNTOS.contains(osName);
-            mIs2K = win2KOS.contains(osName);
-            mIsVista = winVistaOS.contains(osName);
-            mIsWin7 = win7OS.contains(osName);
             String arch = System.getProperty("sun.arch.data.model");
             mIsX64 = "64".equals(arch);
             for(int i=0; i<supportedOS.length; i++) {
@@ -427,22 +396,19 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
                 }
             }
             String osError = getResourceString("unsupported.os.error"); //$NON-NLS-1$
-            IWorkbench workbench = getWorkbench();
-            if (workbench != null)
-            {
-                IWorkbenchWindow window = workbench.getActiveWorkbenchWindow();
-                if (window != null)
+            Display.getDefault().asyncExec(new Runnable() {
+                public void run()
                 {
-                    Common.openError(window.getShell(), osError,
-                                    getShellImage());
+                    Common.openError(Display.getCurrent().getActiveShell(),
+                                     osError,
+                                     cShellImage);
                 }
-            }
+            });
             cInvalidException = osError;
             throw new CoreException(new Status(IStatus.ERROR,PLUGIN_ID,IStatus.ERROR,osError,
                             new RuntimeException(osError)));
         }
     }
-
 
     private void validateVM() throws CoreException
     {
@@ -455,7 +421,7 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
             version = System.getProperty("java.vm.version"); //$NON-NLS-1$
         }
         mJavaVersion = new Version(version,"._"); //$NON-NLS-1$
-        Map<String,String> vms = Common.loadMapProperty(getResourceBundle(),"nt.vms",'\u00FF'); //$NON-NLS-1$ //$NON-NLS-2$
+        Map<String,String> vms = Common.loadMapProperty(getResourceBundle(),"supported.vms",'\u00FF'); //$NON-NLS-1$ //$NON-NLS-2$
         version = vms.get(mJavaVendor);
         if(version != null) {
             String[] tokens = Common.tokenize(version,'-');
@@ -472,9 +438,16 @@ public class EclipseNSISPlugin extends AbstractUIPlugin implements INSISConstant
             }
         }
 
-        String vmError = getFormattedString("unsupported.nt.vms.error",new String[]{System.getProperty("os.name")}) + "\nJava VM '" + mJavaVendor + "' is not supported."; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-        Common.openError(getWorkbench().getActiveWorkbenchWindow().getShell(),
-                        vmError, getShellImage());
+        String vmError = getFormattedString("unsupported.vms.error",new String[]{System.getProperty("os.name")}) + "\nJava VM '" + mJavaVendor + " " + mJavaVersion + "' is not supported."; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+
+        Display.getDefault().asyncExec(new Runnable() {
+            public void run()
+            {
+                Common.openError(Display.getCurrent().getActiveShell(),
+                                 vmError,
+                                 cShellImage);
+            }
+        });
         cInvalidException = vmError;
         throw new CoreException(new Status(IStatus.ERROR,PLUGIN_ID,IStatus.ERROR,vmError,
                         new RuntimeException(vmError)));
