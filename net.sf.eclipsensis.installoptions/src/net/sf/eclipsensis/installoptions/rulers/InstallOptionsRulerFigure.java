@@ -25,9 +25,9 @@ public class InstallOptionsRulerFigure extends RulerFigure
     private double mDPU = -1.0;
     private int mUnit;
 
-    public InstallOptionsRulerFigure(EditPart editPart, boolean isHorizontal, int measurementUnit)
+    public InstallOptionsRulerFigure(EditPart editPart, boolean isHorizontal, RulerProvider rulerProvider)
     {
-        super(isHorizontal, measurementUnit);
+        super(isHorizontal, rulerProvider);
     }
 
     @Override

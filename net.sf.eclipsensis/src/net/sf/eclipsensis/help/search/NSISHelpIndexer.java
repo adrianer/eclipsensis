@@ -22,7 +22,7 @@ import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexWriter;
 //TODO Lucene/Solr
 //import org.apache.lucene.index.IndexWriter.MaxFieldLength;
-import org.apache.lucene.store.SimpleFSDirectory;
+//import org.apache.lucene.store.SimpleFSDirectory;
 import org.eclipse.core.runtime.*;
 import org.eclipse.core.runtime.jobs.ISchedulingRule;
 

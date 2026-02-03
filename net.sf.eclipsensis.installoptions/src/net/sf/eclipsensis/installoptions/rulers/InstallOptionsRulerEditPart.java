@@ -42,7 +42,7 @@ public class InstallOptionsRulerEditPart extends RulerEditPart
     @Override
     protected IFigure createFigure()
     {
-        RulerFigure ruler =  new InstallOptionsRulerFigure(this, isHorizontal(), getRulerProvider().getUnit());
+        RulerFigure ruler =  new InstallOptionsRulerFigure(this, isHorizontal(), getRulerProvider());
         ruler.setInterval(100, 10);
         return ruler;
     }

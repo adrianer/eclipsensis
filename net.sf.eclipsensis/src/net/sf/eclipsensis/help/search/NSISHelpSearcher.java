@@ -21,7 +21,7 @@ import org.apache.lucene.document.Document;
 // TODO Lucene/Solr
 //import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.*;
-import org.apache.lucene.store.SimpleFSDirectory;
+//import org.apache.lucene.store.SimpleFSDirectory;
 import org.eclipse.core.runtime.*;
 import org.eclipse.core.runtime.jobs.Job;
 

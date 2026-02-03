@@ -8,6 +8,16 @@ This project is a fork of a fork of a fork of a fork of the original EclipseNSIS
 
 # Changelog and Download
 
+## Forked and Fixed (0.9.16)
+
+This project is a fork of [spt-oss/eclipsensis](https://github.com/spt-oss/eclipsensis) and fixed for:
+
+* Java supported up to 26 (though tested only with 21)
+* Tested with Eclipse 2025-12 and Eclipse Adoptium 21
+* This will most likely *not* work with Eclipse versions older than 2025-12. If it does not work, upgrade to 2025-12.
+
+Download: [0.9.16](https://github.com/adrianer/eclipsensis/raw/master/dist/eclipsensis-0.9.16.zip)
+
 ## Forked and Fixed (0.9.15)
 
 This project is a fork of [spt-oss/eclipsensis](https://github.com/spt-oss/eclipsensis) and fixed for:
